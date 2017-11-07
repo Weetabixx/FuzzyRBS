@@ -14,7 +14,6 @@ inputlines = []
 with inputfile as f:
     inputlines = f.readlines()
 inputfile.close()
-print(inputlines)
 numberoflines = len(inputlines)
 ruleBaseName = ""  # name of the rulebase, always first line of text file
 ruletexts = []  # the rules as strings
@@ -22,6 +21,8 @@ fuzzysetmembertexts = {}  # the fuzzy set memberships as strings in a dictionary
 variables = {}  # the variables in a dictionary
 
 ruleBaseName = inputlines[0].rstrip()  # read the name of the rule base
+print("Rules Base:")
+print(ruleBaseName)
 
 currentline = 2
 readvariables = True
@@ -39,8 +40,8 @@ while readrules:  # read all the rules
         readrules = False
         readfuzzysets = False
         readvariables = False
+print("rules:")
 print(ruletexts)
-print(len(ruletexts))
 
 currentdimension = ""
 while readfuzzysets:  # read the fuzzy sets and their definitions
@@ -59,6 +60,7 @@ while readfuzzysets:  # read the fuzzy sets and their definitions
         readrules = False
         readfuzzysets = False
         readvariables = False
+print("fuzzy sets:")
 print(fuzzysetmembertexts)
 
 while readvariables:
@@ -70,6 +72,7 @@ while readvariables:
         readrules = False
         readfuzzysets = False
         readvariables = False
+print("variables:")
 print(variables)
 
 # create fuzzy sets and their membership functions
