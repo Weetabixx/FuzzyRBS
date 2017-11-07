@@ -45,14 +45,14 @@ print(ruletexts)
 
 currentdimension = ""
 while readfuzzysets:  # read the fuzzy sets and their definitions
-    if '=' in inputlines[currentline]:
+    if '=' in inputlines[currentline]:  # if we have reached the variables, stop
         readfuzzysets = False
         break
-    elif inputlines[currentline] == '\n':
+    elif inputlines[currentline] == '\n':  # skip the empty lines
         pass
-    elif len(inputlines[currentline].split()) > 1:
+    elif len(inputlines[currentline].split()) > 1:  # if there is more than one item on line it must be a fuzzy set
         fuzzysetmembertexts[currentdimension].append(inputlines[currentline].rstrip())
-    else:
+    else:  # if there is only one item it must be a new fuzzy dimension/ new set of fuzzy sets
         currentdimension = inputlines[currentline].rstrip()
         fuzzysetmembertexts[currentdimension] = []
     currentline += 1
@@ -64,11 +64,11 @@ print("fuzzy sets:")
 print(fuzzysetmembertexts)
 
 while readvariables:
-    if '=' in inputlines[currentline]:
+    if '=' in inputlines[currentline]:  # if the line contains a variable
         variableline = inputlines[currentline].split(" = ")
         variables[variableline[0]] = float(variableline[1])
     currentline += 1
-    if currentline == numberoflines:
+    if currentline >= numberoflines:  # if we reached the end of the file stop
         readrules = False
         readfuzzysets = False
         readvariables = False

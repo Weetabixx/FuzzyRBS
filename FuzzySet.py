@@ -25,6 +25,10 @@ class FuzzySet:
         else:  # default return value is 0
             return 0
 
+    def meanofmax(self):  # returns center of core
+        mom = self.a + ((self.b - self.a) / 2)
+        return mom
+
 
 
 
