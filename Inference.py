@@ -55,7 +55,7 @@ class Rule:
         except IndexError:
             print("that rule did'nt make any sense")
 
-    def andoror(self, values):
+    def andoror(self, values):  # max-min the values
         if self.connective == "and":
             return max(values)
         else:
