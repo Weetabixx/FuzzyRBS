@@ -23,7 +23,7 @@ class Rule:
             length = len(ruleaslist)
             self.rulename = ruleaslist[1]
             self.antecedence = []
-            antecedenceindex = ruleaslist.index("if")
+            antecedenceindex = ruleaslist.index("If")
             antecedentreading = True
             concequencereading = False
             if "and" in ruleaslist:
@@ -50,7 +50,7 @@ class Rule:
             if concequencereading:
                 concequenceindex += 2
                 self.convariable = ruleaslist[concequenceindex]
-                concequenceindex += 2
+                concequenceindex += 3
                 self.convalue = ruleaslist[concequenceindex]
         except IndexError:
             print("that rule did'nt make any sense")

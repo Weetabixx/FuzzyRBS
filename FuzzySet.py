@@ -49,3 +49,7 @@ class FuzzyDimension:
     def membership(self, setname, value):  # returns membership value of a given fuzzy set
         percentage = self.memberships[setname].membership(value)
         return percentage
+
+    def meanofmax(self, setname):
+        mom = self.memberships[setname].meanofmax()
+        return mom
