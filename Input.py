@@ -95,9 +95,35 @@ for dimension, fuzzysets in fuzzysetmembertexts.items():  # for each dimension a
     dimensions[dimension] = x
 
 # send fuzzy rules to inference engine
-
+rules = []  # create a list of all rules
+for ruleastext in ruletexts:
+    r = Rule(ruleastext)
+    rules.append(r)
 
 # tell inference engine to use fuzzy values to infere and aggregate
-
+results = []
+for rule in rules:  # fire all the rules
+    result = rule.fire(membershipofsets)
+    results.append(result)
+for concequence in results:  # aggregate all the values
+    resultdimension = concequence[0]
+    resultset = concequence[1]
+    resultvalue = concequence[2]
+    membershipofsets[resultdimension][resultset] = max(membershipofsets[resultdimension][resultset], resultvalue)
 
 # deffuzzify the output of the inference engine
+crispdimensionvalues = {}
+for dimensionname, fuzzysetlist in membershipofsets.items():
+    dimensionvalue = 0
+    dimensionset = ""
+    for fset, fvalue in fuzzysetlist.items():  # selects the fuzzy set with the highest membership
+        if fvalue > dimensionvalue:
+            dimensionvalue = fvalue
+            dimensionset = fset
+    if dimensionset == "":  # check there is a fuzzy set
+        print("couldn't find an answer to" + dimensionname)
+    else:
+        crisp = dimensions[dimensionname].meanofmax(dimensionset)
+        crispdimensionvalues[dimensionname] = crisp
+print("crisp output:")
+print(crispdimensionvalues)
