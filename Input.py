@@ -1,3 +1,5 @@
+from FuzzySet import FuzzyDimension
+from Inference import Rule
 #
 #  Input module:
 #  -	Divides text into fuzzy rule base, membership functions and crisp input
@@ -75,11 +77,22 @@ while readvariables:
 print("variables:")
 print(variables)
 
-# create fuzzy sets and their membership functions
-
-
-# send variables to fuzzy sets
-
+# create fuzzy sets and their membership functions and fuzzify variables
+membershipofsets = {}  # this will contain the state of the membership-ness of every set
+dimensions = {}  # this will contain the dimension objects
+for dimension, fuzzysets in fuzzysetmembertexts.items():  # for each dimension and its fuzzy sets
+    x = FuzzyDimension(dimension)
+    membershipofsets[dimension] = {}
+    for setastext in fuzzysets:  # for each fuzzy set in the dimension
+        setaslist = setastext.split()
+        setname = setaslist[0]
+        memberships = (float(setaslist[1]), float(setaslist[2]), float(setaslist[3]), float(setaslist[4]))
+        x.add_membership(setname, memberships)
+        membershipofsets[dimension][setname] = 0   # initialise the membership of all sets to 0
+        if dimension in variables.keys():
+            # send variables to fuzzy sets
+            membershipofsets[dimension][setname] = x.membership(setname,variables[dimension])
+    dimensions[dimension] = x
 
 # send fuzzy rules to inference engine
 
@@ -87,4 +100,4 @@ print(variables)
 # tell inference engine to use fuzzy values to infere and aggregate
 
 
-# tell defuzzify module to deffuzzify the output of the inference engine
+# deffuzzify the output of the inference engine
