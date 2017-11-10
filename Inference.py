@@ -57,9 +57,9 @@ class Rule:
 
     def andoror(self, values):  # max-min the values
         if self.connective == "and":
-            return max(values)
-        else:
             return min(values)
+        else:
+            return max(values)
 
     def fire(self, variablevalues):             # takes a dictionary of the non zero fuzzy dimensions with their sets and membershipness,
         values = []                             # returns triple of consequence and fire value

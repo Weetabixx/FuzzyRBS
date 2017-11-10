@@ -125,5 +125,7 @@ for dimensionname, fuzzysetlist in membershipofsets.items():
     else:
         crisp = dimensions[dimensionname].meanofmax(dimensionset)
         crispdimensionvalues[dimensionname] = crisp
+print("fuzzy sets used:")
+print(membershipofsets)
 print("crisp output:")
 print(crispdimensionvalues)

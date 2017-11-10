@@ -12,10 +12,10 @@ class FuzzySet:
         self.beta = beta
 
     def membership(self, value):  # returns membership value in a set given a crisp value
-        if value <= self.a - self.alpha or value >= self.b + self.beta:  # if value completely outside of set
-            return 0
-        elif self.a <= value <= self.b:  # if value inside core
+        if self.a <= value <= self.b:  # if value inside core
             return 1
+        elif value <= self.a - self.alpha or value >= self.b + self.beta:  # if value completely outside of set
+            return 0
         elif self.a - self.alpha <= value and value <= self.a:  # if value less than core
             percentage = (value - self.a + self.alpha) / self.alpha
             return percentage
